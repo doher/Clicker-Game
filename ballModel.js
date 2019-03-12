@@ -1,18 +1,16 @@
-function random(n, m) {
-    return Math.floor(Math.random() * (m - n + 1)) + n;
-}
-
 export class BallModel {
-    constructor(radius, speed) {
-        let _radius = radius,
+    constructor(x, y, radius, speed) {
+        let _x = x,
+            _y = y,
+            _radius = radius,
             _speed = speed;
 
         this.getX = function () {
-            return random(30, 300);
+            return _x;
         }
 
         this.getY = function () {
-            return random(30, 300);
+            return _y;
         }
 
         this.getRadius = function () {

@@ -12,8 +12,9 @@ export class BallView {
         }
     }
 
-    getElement() {
-        let model = this.getModel(),
+    draw() {
+        let field = this.getField(),
+            model = this.getModel(),
             x = model.getX(),
             y = model.getY(),
             radius = model.getRadius(),
@@ -22,13 +23,6 @@ export class BallView {
         element.setAttribute("cx", x);
         element.setAttribute("cy", y);
         element.setAttribute("r", radius);
-
-        return element;
-    }
-
-    draw() {
-        let field = this.getField(),
-            element = this.getElement();
 
         field.append(element);
     }

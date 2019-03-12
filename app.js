@@ -2,19 +2,21 @@ import { BallModel } from './ballModel.js';
 import { BallView } from './ballView.js';
 import { BallController } from './ballController.js';
 
+function random(n, m) {
+    return Math.floor(Math.random() * (m - n + 1)) + n;
+}
+
 let $field = $('g.ball');
 
-let modelBall = new BallModel(1, 10),
+let modelBall = new BallModel(300, 300, 1, 10),
     viewBall = new BallView($field, modelBall),
     controllerBall = new BallController(modelBall, viewBall);
 
 controllerBall.expandBall();
 controllerBall.expandBall();
-viewBall.getElement();
+
 viewBall.draw();
 
-
-console.log(viewBall.getElement());
 
 
 
