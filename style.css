@@ -1,0 +1,28 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    height: 95vh;
+}
+
+.container {
+    margin: 10px;
+}
+
+header>.container {
+    height: 15vh;
+    background-color: rgb(92, 119, 163);
+}
+
+.field, svg {
+    width: 100%;
+    background-color: rgb(92, 163, 92);
+    height: 70vh;
+}
+
+footer>.container {
+    background-color: rgb(163, 103, 92);
+}
