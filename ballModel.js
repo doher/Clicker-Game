@@ -30,9 +30,3 @@ export class BallModel {
         }
     }
 }
-
-
-
-
-
-

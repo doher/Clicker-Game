@@ -26,5 +26,4 @@ export class BallView {
 
         field.append(element);
     }
-
 }
