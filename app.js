@@ -1,6 +1,12 @@
-import { BallModel } from './ballModel.js';
-import { BallView } from './ballView.js';
-import { BallController } from './ballController.js';
+import {
+    BallModel
+} from './ballModel.js';
+import {
+    BallView
+} from './ballView.js';
+import {
+    BallController
+} from './ballController.js';
 
 let ballModel1 = new BallModel(300, 300, 1, 0.3),
     ballModel2 = new BallModel(390, 390, 10, 1),
