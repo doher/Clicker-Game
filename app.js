@@ -2,59 +2,34 @@ import { BallModel } from './ballModel.js';
 import { BallView } from './ballView.js';
 import { BallController } from './ballController.js';
 
-function random(n, m) {
-    return Math.floor(Math.random() * (m - n + 1)) + n;
+let ballModel1 = new BallModel(300, 300, 1, 0.3),
+    ballModel2 = new BallModel(390, 390, 10, 1),
+    ballView = new BallView(),
+    ballController = new BallController(),
+    $field = $('g.ball');
+
+ballModel1.start(ballView);
+ballModel2.start(ballView);
+ballView.start([ballModel1, ballModel2], $field);
+ballController.start([ballModel1, ballModel2]);
+
+let RequestAnimationFrame =
+    window.requestAnimationFrame ||
+    window.webkitRequestAnimationFrame ||
+    window.mozRequestAnimationFrame ||
+    window.oRequestAnimationFrame ||
+    window.msRequestAnimationFrame ||
+    function (callback) {
+        window.setTimeout(callback, 1000 / 60);
+    };
+
+function Tick() {
+    ballController.expandBall();
+    PlanNextTick();
 }
 
-let $field = $('g.ball');
+function PlanNextTick() {
+    RequestAnimationFrame(Tick);
+}
 
-let modelBall = new BallModel(300, 300, 1, 10),
-    viewBall = new BallView($field, modelBall),
-    controllerBall = new BallController(modelBall, viewBall);
-
-controllerBall.expandBall();
-controllerBall.expandBall();
-
-viewBall.draw();
-
-
-
-
-// let timer = setInterval(() => {
-//     let modelBall = new BallModel(1, 10),
-//         viewBall = new BallView($field, modelBall),
-//         controllerBall = new BallController(modelBall, viewBall);
-
-//     controllerBall.expandBall();
-//     viewBall.draw();
-// }, 1000);
-
-
-// console.log(modelBall.getRadius());
-
-// let ball = new ModelBall(10, 2),
-//     speed = ball.getSpeed();
-
-// function apearBall(ball) {
-
-//     let circles = $('circle');
-
-//     console.log(circles);
-
-//     $('g.ball').append(ball.createBall());
-// }
-
-// let s = 0;
-
-// // let timer = setInterval(() => {
-// s += speed;
-
-// console.log(ball.getY());
-// ball.setRadius(s);
-// // apearBall(ball);
-// // }, 1000);
-
-
-
-
-
+PlanNextTick();

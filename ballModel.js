@@ -3,7 +3,8 @@ export class BallModel {
         let _x = x,
             _y = y,
             _radius = radius,
-            _speed = speed;
+            _speed = speed,
+            _view;
 
         this.getX = function () {
             return _x;
@@ -27,6 +28,17 @@ export class BallModel {
 
         this.setSpeed = function (speed) {
             _speed = speed;
+        }
+    }
+
+    start(view) {
+        this._view = view;
+    }
+
+    updateView() {
+
+        if (this._view) {
+            this._view.update();
         }
     }
 }

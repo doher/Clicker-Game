@@ -1,38 +1,34 @@
 export class BallController {
-    constructor(model, view) {
-        let _model = model,
-            _view = view;
-
-        this.getModel = function () {
-            return _model;
-        }
-
-        this.getView = function () {
-            return _view;
-        }
+    constructor() {
+        let _model;
     }
 
-    changeSpeedDirection() {
-        let model = this.getModel(),
-            speed = model.getSpeed();
-
-        model.setSpeed(-speed);
+    start(model) {
+        this._model = model;
     }
 
     expandBall() {
-        let view = this.getView(),
-            model = this.getModel(),
-            speed = model.getSpeed(),
-            radius = model.getRadius();
+        let model = this._model;
 
-        model.setRadius(Math.round((radius + speed) * 100) / 100);
 
-        if (model.getRadius() >= 30) {
-            this.changeSpeedDirection();
-        }
 
-        if (model.getRadius() <= 0) {
-            this.changeSpeedDirection();
-        }
+        model = model.map(item => {
+            let radius = item.getRadius(),
+                speed = item.getSpeed();
+
+            radius = ((radius + speed) < 0) ? 0 : (radius + speed);
+
+            if (radius >= 30 || radius === 0) {
+                item.setSpeed(-speed);
+            }
+
+            item.setRadius(radius);
+
+            return item;
+        });
+
+        model.forEach(item => {
+            item.updateView();
+        });
     }
 }
