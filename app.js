@@ -6,33 +6,39 @@ function randomCoords(n, m) {
     return Math.floor(Math.random() * (m - n + 1)) + n;
 }
 
-let x = randomCoords(30, 300),
+let ballArray = [],
+    $field = $('g.ball'),
+    x = randomCoords(30, 300),
     y = randomCoords(30, 300);
 
-let ballModel = new BallModel(x, y, 1, 0.6),
+let ballModel = new BallModel(x, y),
     ballView = new BallView(),
-    ballController = new BallController(),
-    $field = $('g.ball'),
-    ballArray = [ballModel];
+    ballController = new BallController();
+
+ballArray.push(ballModel);
 
 ballModel.start(ballView);
 ballView.start(ballArray, $field);
 ballController.start(ballArray);
 
-// let timer = setInterval(() => {
-//     let x = randomCoords(30, 300),
-//         y = randomCoords(30, 300);
+function addBall() {
+    let x = randomCoords(30, 300),
+        y = randomCoords(30, 300),
+        ballModel = new BallModel(x, y);
 
-//     let model = new BallModel(x, y, 1, 0.6);
+    ballArray.push(ballModel);
 
-//     ballArray.push(model);
+    ballModel.start(ballView);
+    ballView.start(ballArray, $field);
+    ballController.start(ballArray);
+}
 
-//     ballModel.start(ballView);
-//     ballView.start(ballArray, $field);
-//     ballController.start(ballArray);
-// }, 2000);
+addBall();
+addBall();
+addBall();
+addBall();
 
-
+console.log(ballArray);
 
 let RequestAnimationFrame =
     window.requestAnimationFrame ||

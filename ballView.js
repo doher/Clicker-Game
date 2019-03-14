@@ -5,8 +5,10 @@ export class BallView {
     }
 
     start(model, field) {
-        this._field = field,
-            this._model = model;
+        this._field = field;
+        this._model = model;
+
+        field.children().remove();
 
         model.forEach(item => {
             let x = item.getX(),
@@ -27,6 +29,10 @@ export class BallView {
 
         this._field.children().each(function (i, item) {
             $(item).attr('r', radius[i]);
+
+            if ($(item).attr('r') == 0) {
+                $(item).remove();
+            }
         });
     }
 }
