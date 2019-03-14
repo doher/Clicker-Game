@@ -1,3 +1,5 @@
+const MAX_RADIUS = 30;
+
 export class BallController {
     constructor() {
         let _model;
@@ -10,15 +12,13 @@ export class BallController {
     expandBall() {
         let model = this._model;
 
-
-
         model = model.map(item => {
             let radius = item.getRadius(),
                 speed = item.getSpeed();
 
             radius = ((radius + speed) < 0) ? 0 : (radius + speed);
 
-            if (radius >= 30 || radius === 0) {
+            if (radius >= MAX_RADIUS || radius === 0) {
                 item.setSpeed(-speed);
             }
 
