@@ -1,4 +1,4 @@
-const MAX_RADIUS = 30;
+export const MAX_RADIUS = 30;
 
 export class BallController {
     constructor() {
