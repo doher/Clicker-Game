@@ -8,31 +8,42 @@ export class BallView {
         this._field = field;
         this._model = model;
 
-        field.children().remove();
+        let x = model.getX(),
+            y = model.getY(),
+            radius = model.getRadius(),
+            element = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
 
-        model.forEach(item => {
-            let x = item.getX(),
-                y = item.getY(),
-                radius = item.getRadius(),
-                element = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
+        element.setAttribute("cx", x);
+        element.setAttribute("cy", y);
+        element.setAttribute("r", radius);
 
-            element.setAttribute("cx", x);
-            element.setAttribute("cy", y);
-            element.setAttribute("r", radius);
+        field.append(element);
+    }
 
-            field.append(element);
+    getElement() {
+        let x = this._model.getX(),
+            y = this._model.getY(),
+            field = this._field,
+            element;
+
+        field.children().each(function (i, item) {
+            let cx = $(item).attr('cx'),
+                cy = $(item).attr('cy');
+
+            if ((cx == x) && (cy == y)) {
+                element = item;
+            }
         });
+
+        return element;
     }
 
     update() {
-        let radius = this._model.map(item => item.getRadius());
+        let radius = this._model.getRadius(),
+            element = this.getElement(),
+            field = this._field;
 
-        this._field.children().each(function (i, item) {
-            $(item).attr('r', radius[i]);
-
-            if ($(item).attr('r') == 0) {
-                $(item).remove();
-            }
-        });
+        field.find(element).attr('r', radius);
+        radius === 0 ? field.find(element).remove() : radius;
     }
 }

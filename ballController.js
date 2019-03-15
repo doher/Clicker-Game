@@ -10,25 +10,17 @@ export class BallController {
     }
 
     expandBall() {
-        let model = this._model;
+        let model = this._model,
+            radius = model.getRadius(),
+            speed = model.getSpeed();
 
-        model = model.map(item => {
-            let radius = item.getRadius(),
-                speed = item.getSpeed();
+        radius = ((radius + speed) < 0) ? 0 : (radius + speed);
 
-            radius = ((radius + speed) < 0) ? 0 : (radius + speed);
+        if (radius >= MAX_RADIUS || radius === 0) {
+            model.setSpeed(-speed);
+        }
 
-            if (radius >= MAX_RADIUS || radius === 0) {
-                item.setSpeed(-speed);
-            }
-
-            item.setRadius(radius);
-
-            return item;
-        });
-
-        model.forEach(item => {
-            item.updateView();
-        });
+        model.setRadius(radius);
+        model.updateView();
     }
 }

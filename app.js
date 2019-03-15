@@ -6,39 +6,38 @@ function randomCoords(n, m) {
     return Math.floor(Math.random() * (m - n + 1)) + n;
 }
 
-let ballArray = [],
-    $field = $('g.ball'),
-    x = randomCoords(30, 300),
-    y = randomCoords(30, 300);
-
-let ballModel = new BallModel(x, y),
-    ballView = new BallView(),
-    ballController = new BallController();
-
-ballArray.push(ballModel);
-
-ballModel.start(ballView);
-ballView.start(ballArray, $field);
-ballController.start(ballArray);
+let $field = $('g.ball'),
+    array = [];
 
 function addBall() {
     let x = randomCoords(30, 300),
         y = randomCoords(30, 300),
-        ballModel = new BallModel(x, y);
+        model = new BallModel(x, y),
+        view = new BallView(),
+        controller = new BallController();
 
-    ballArray.push(ballModel);
+    model.start(view);
+    view.start(model, $field);
+    controller.start(model);
 
-    ballModel.start(ballView);
-    ballView.start(ballArray, $field);
-    ballController.start(ballArray);
+    array.push(controller);
 }
 
 addBall();
 addBall();
-addBall();
-addBall();
 
-console.log(ballArray);
+let timer = setInterval(() => {
+    addBall();
+}, 6000);
+
+$field.click(function (eo) {
+    let item = eo.target;
+
+    if ($(item).attr('r')) {
+        $(item).remove();
+        addBall();
+    }
+});
 
 let RequestAnimationFrame =
     window.requestAnimationFrame ||
@@ -51,7 +50,11 @@ let RequestAnimationFrame =
     };
 
 function Tick() {
-    ballController.expandBall();
+
+    array.forEach((item) => {
+        item.expandBall();
+    });
+
     PlanNextTick();
 }
 

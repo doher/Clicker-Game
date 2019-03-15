@@ -1,5 +1,5 @@
 export class BallModel {
-    constructor(x, y, radius = 1, speed = 1) {
+    constructor(x, y, radius = 1, speed = 0.3) {
         let _x = x,
             _y = y,
             _radius = radius,
