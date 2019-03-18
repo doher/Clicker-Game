@@ -1,4 +1,6 @@
-export const MAX_RADIUS = 30;
+'use strict';
+
+export const MAX_RADIUS = 20;
 
 export class BallController {
     constructor() {
@@ -16,7 +18,7 @@ export class BallController {
 
         radius = ((radius + speed) < 0) ? 0 : (radius + speed);
 
-        if (radius >= MAX_RADIUS || radius === 0) {
+        if (radius >= MAX_RADIUS) {
             model.setSpeed(-speed);
         }
 

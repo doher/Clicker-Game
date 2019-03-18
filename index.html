@@ -11,25 +11,46 @@
 </head>
 
 <body>
-    <header>
-        <div class="container">
-            <h1>Header</h1>
+    <header class="heading">
+        <div class="wrapper">
+            <h1 class="game-name">Clicker</h1>
+            <nav>
+                <ul class="nav-list">
+                    <li class="nav-start-game"><a href="#">New Game</a></li>
+                    <li class="nav-main-menu"><a href="#">Main Menu</a></li>
+                </ul>
+            </nav>
         </div>
     </header>
-    <section>
-        <div class="container">
-            <div class="field">
-                <svg>
-                    <g class="ball">
-                    </g>
-                </svg>
-            </div>
-        </div>
-    </section>
-    <footer>
-        <div class="container">
-            <p>Footer</p>
-        </div>
+    <div class="main-content">
+        <aside class="game-rules">
+            <h2>Rules:</h2>
+            <ul>
+                <li>click = + 500</li>
+                <li>miss = -100</li>
+                <li>don't click ball = -300</li>
+            </ul>
+        </aside>
+        <main class="game-field">
+            <svg>
+                <defs>
+                    <radialGradient id="ballGradient">
+                        <stop offset="0%" stop-color="#FF0000" />
+                        <stop offset="100%" stop-color="#00FFF00" />
+                    </radialGradient>
+                </defs>
+
+                <g class="ball">
+                </g>
+            </svg>
+        </main>
+        <aside class="hight-score-field">
+            <h2>Hight score:</h2>
+            <h2>Your score:</h2>
+        </aside>
+    </div>
+
+    <footer class="footer">
     </footer>
     <script type="module" src="app.js"></script>
 </body>

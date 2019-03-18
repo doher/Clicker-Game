@@ -2,27 +2,59 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    color: black;
 }
 
 body {
     height: 95vh;
 }
 
-.container {
-    margin: 10px;
+.heading {
+    text-align: center;
+    padding: 1em;
+    background-image: linear-gradient(rgb(63, 104, 182), rgb(99, 204, 187));
+    height: 20vh;
 }
 
-header>.container {
-    height: 15vh;
-    background-color: rgb(92, 119, 163);
+.game-name {
+    padding: 0.2em;
 }
 
-.field, svg {
-    width: 100%;
-    background-color: rgb(92, 163, 92);
-    height: 70vh;
+.nav-list li {
+    display: inline;
+    border: 1px solid rgb(163, 96, 96);
+    border-radius: 5px;
+    padding: 0.2em;
+    background-color: rgb(163, 96, 96);
 }
 
-footer>.container {
-    background-color: rgb(163, 103, 92);
+a {
+    text-decoration: none;
+}
+
+.main-content {
+    margin: 0 auto;
+    display: flex;
+    background-image: linear-gradient(rgb(99, 204, 187), rgb(63, 104, 182), rgb(99, 204, 187));
+}
+
+.game-field, svg {
+    background-image: linear-gradient(rgb(18, 27, 104), rgb(41, 72, 139), rgb(80, 83, 107));
+    border-radius: 5px;
+    width: 50vw;
+    height: 60vh;
+}
+
+.game-rules, .hight-score-field {
+    background-image: linear-gradient(rgb(99, 204, 187), rgb(63, 104, 182), rgb(99, 204, 187));
+    width: 25vw;
+    height: 60vh;
+    border: 1px solid rgb(81, 79, 180);
+    border-radius: 5px;
+    margin: 0 2%;
+}
+
+.footer {
+    height: 20vh;
+    background-image: linear-gradient(rgb(99, 204, 187), rgb(63, 104, 182));
 }

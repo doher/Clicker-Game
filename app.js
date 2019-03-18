@@ -1,3 +1,5 @@
+'use strict';
+
 import { BallModel } from './ballModel.js';
 import { BallView } from './ballView.js';
 import { BallController, MAX_RADIUS } from './ballController.js';
@@ -7,16 +9,17 @@ function randomCoords(n, m) {
 }
 
 let $field = $('g.ball'),
-    array = [];
+    controllerArray = [],
+    modelArray = [];
 
 function addBall() {
-    let height = $('.field').height(),
-        width = $('.field').width(),
+    let height = $('.game-field').height(),
+        width = $('.game-field').width(),
         x = randomCoords(MAX_RADIUS, width - MAX_RADIUS),
         y = randomCoords(MAX_RADIUS, height - MAX_RADIUS),
         isIncorrect = false;
 
-    if (array.length) {
+    if (controllerArray.length) {
 
         $field.children().each(function (i, item) {
             let cx = $(item).attr('cx'),
@@ -42,26 +45,39 @@ function addBall() {
     view.start(model, $field);
     controller.start(model);
 
-    array.push(controller);
+    controllerArray.push(controller);
+    modelArray.push(model);
 }
 
 addBall();
 addBall();
 
-let distance = 30;
+let start = Date.now(),
+    playTime = 50000,
+    score = 0;
 
-let timer = setInterval(() => {
-    addBall();
-}, 6000);
-
-$field.click(function (eo) {
+$('.game-field').click(function (eo) {
     let item = eo.target;
+
+    score -= 100;
 
     if ($(item).attr('r')) {
         $(item).remove();
+        score += 600;
         addBall();
     }
 });
+
+let timer = setInterval(() => {
+    let timePassed = Date.now() - start;
+
+    if (timePassed >= playTime) {
+        clearInterval(timer);
+        return;
+    }
+
+    addBall();
+}, 5000);
 
 let RequestAnimationFrame =
     window.requestAnimationFrame ||
@@ -75,15 +91,28 @@ let RequestAnimationFrame =
 
 function Tick() {
 
-    array.forEach((item) => {
+    controllerArray.forEach((item) => {
         item.expandBall();
+    });
+
+    modelArray = modelArray.filter((item) => {
+
+        if (item.getRadius() > 0) {
+            return item;
+        }
+
+        score -= 300;
     });
 
     PlanNextTick();
 }
 
 function PlanNextTick() {
-    RequestAnimationFrame(Tick);
+    let timePassed = Date.now() - start;
+
+    if (timePassed < playTime) {
+        RequestAnimationFrame(Tick);
+    }
 }
 
 PlanNextTick();

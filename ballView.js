@@ -1,3 +1,5 @@
+'use strict';
+
 export class BallView {
     constructor() {
         let _field,
@@ -16,6 +18,7 @@ export class BallView {
         element.setAttribute("cx", x);
         element.setAttribute("cy", y);
         element.setAttribute("r", radius);
+        element.setAttribute("fill", "url(#ballGradient)");
 
         field.append(element);
     }
