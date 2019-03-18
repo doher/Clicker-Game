@@ -2,11 +2,13 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    color: black;
+    list-style-type: none;
+    user-select: none;
 }
 
 body {
     height: 95vh;
+    color: rgb(12, 12, 12);
 }
 
 .heading {
@@ -25,11 +27,12 @@ body {
     border: 1px solid rgb(163, 96, 96);
     border-radius: 5px;
     padding: 0.2em;
-    background-color: rgb(163, 96, 96);
+    background-color: rgb(223, 211, 211);
 }
 
 a {
     text-decoration: none;
+    color: rgb(77, 65, 65);
 }
 
 .main-content {
@@ -45,13 +48,15 @@ a {
     height: 60vh;
 }
 
-.game-rules, .hight-score-field {
+aside.game-rules, .hight-score-field {
+    color: rgb(82, 64, 55);
     background-image: linear-gradient(rgb(99, 204, 187), rgb(63, 104, 182), rgb(99, 204, 187));
     width: 25vw;
     height: 60vh;
     border: 1px solid rgb(81, 79, 180);
     border-radius: 5px;
     margin: 0 2%;
+    padding: 1%;
 }
 
 .footer {
