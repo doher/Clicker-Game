@@ -1,15 +1,8 @@
 'use strict';
 
-import {
-    BallModel
-} from './ballModel.js';
-import {
-    BallView
-} from './ballView.js';
-import {
-    BallController,
-    MAX_RADIUS
-} from './ballController.js';
+import { BallModel } from './ballModel.js';
+import { BallView } from './ballView.js';
+import { BallController, MAX_RADIUS } from './ballController.js';
 
 function randomCoords(n, m) {
     return Math.floor(Math.random() * (m - n + 1)) + n;
