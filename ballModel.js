@@ -1,7 +1,7 @@
 'use strict';
 
 export class BallModel {
-    constructor(x, y, radius = 1, speed = 0.3) {
+    constructor(x, y, radius = 1, speed = 0.1) {
         let _x = x,
             _y = y,
             _radius = radius,

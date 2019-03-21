@@ -1,17 +1,42 @@
 'use strict';
 
-import { BallModel } from './ballModel.js';
-import { BallView } from './ballView.js';
-import { BallController, MAX_RADIUS } from './ballController.js';
-
-function randomCoords(n, m) {
-    return Math.floor(Math.random() * (m - n + 1)) + n;
-}
+import {
+    BallModel
+} from './ballModel.js';
+import {
+    BallView
+} from './ballView.js';
+import {
+    BallController,
+    MAX_RADIUS
+} from './ballController.js';
 
 let $field = $('.game-field'),
     $svg = $('g.ball'),
     controllerArray = [],
-    modelArray = [];
+    modelArray = [],
+    startTime = Date.now(),
+    playTime = 10000,
+    score = 0;
+
+addBall($field);
+addBall($field);
+
+$field.on('click', handler);
+
+let RequestAnimationFrame =
+    window.requestAnimationFrame ||
+    window.webkitRequestAnimationFrame ||
+    window.mozRequestAnimationFrame ||
+    window.oRequestAnimationFrame ||
+    window.msRequestAnimationFrame ||
+    function (callback) {
+        window.setTimeout(callback, 1000 / 60);
+    };
+
+function randomCoords(n, m) {
+    return Math.floor(Math.random() * (m - n + 1)) + n;
+}
 
 function addBall(field) {
     let height = field.height(),
@@ -50,49 +75,6 @@ function addBall(field) {
     modelArray.push(model);
 }
 
-addBall($field);
-addBall($field);
-
-let start = Date.now(),
-    playTime = 60000,
-    score = 0;
-
-function handler(eo) {
-    let item = eo.target;
-
-    score -= 100;
-
-    if ($(item).attr('r')) {
-        $(item).remove();
-        score += 600;
-        addBall($field);
-    }
-};
-
-$field.on('click', handler);
-
-let timer = setInterval(() => {
-    let timePassed = Date.now() - start;
-
-    if (timePassed >= playTime) {
-        clearInterval(timer);
-        $field.off('click', handler);
-        return;
-    }
-
-    addBall($field);
-}, 5000);
-
-let RequestAnimationFrame =
-    window.requestAnimationFrame ||
-    window.webkitRequestAnimationFrame ||
-    window.mozRequestAnimationFrame ||
-    window.oRequestAnimationFrame ||
-    window.msRequestAnimationFrame ||
-    function (callback) {
-        window.setTimeout(callback, 1000 / 60);
-    };
-
 function Tick() {
 
     controllerArray.forEach((item) => {
@@ -105,18 +87,44 @@ function Tick() {
             return item;
         }
 
-        score -= 300;
+        score -= 500;
     });
 
     PlanNextTick();
 }
 
 function PlanNextTick() {
-    let timePassed = Date.now() - start;
+    let timePassed = Date.now() - startTime,
+        $spanTime = $('.time'),
+        $spanYourScore = $('.your-score'),
+        $balls = $('circle'),
+        ballsLength = $balls.length;
+
+    if (ballsLength < 2) {
+        addBall($field);
+    }
+
+    (playTime - timePassed) < 0 ? $spanTime.text(0) : $spanTime.text((playTime - timePassed) / 1000);
+
+    $spanYourScore.text(score);
 
     if (timePassed < playTime) {
         RequestAnimationFrame(Tick);
+    } else {
+        $field.off('click', handler);
     }
 }
+
+function handler(eo) {
+    let item = eo.target;
+
+    score -= 100;
+
+    if ($(item).attr('r')) {
+        $(item).remove();
+        score += 400;
+        addBall($field);
+    }
+};
 
 PlanNextTick();
