@@ -13,14 +13,20 @@ import {
 
 let $field = $('.game-field'),
     $svg = $('g.ball'),
+    $newGameButton = $('.nav-start-game'),
     controllerArray = [],
     modelArray = [],
     startTime = Date.now(),
-    playTime = 60000,
-    score = 0;
+    playTime = 10000,
+    score = 0,
+    isStartGame = false;
 
-addBall($field);
-addBall($field);
+$newGameButton.click(function () {
+    if (!isStartGame) {
+        PlanNextTick();
+        isStartGame = true;
+    }
+});
 
 $field.on('click', handler);
 
@@ -101,25 +107,25 @@ function PlanNextTick() {
         ballsLength = $balls.length,
         leftTime = playTime - timePassed;
 
-    if ((45000 < leftTime) && (leftTime < playTime)) {
+    if ((playTime * 0.75 < leftTime) && (leftTime < playTime)) {
 
         if (ballsLength < 2) {
             addBall($field);
         }
 
-    } else if ((30000 < leftTime) && (leftTime < 45000)) {
+    } else if ((playTime * 0.5 < leftTime) && (leftTime < playTime * 0.75)) {
 
         if (ballsLength < 3) {
             addBall($field);
         }
 
-    } else if ((15000 < leftTime) && (leftTime < 30000)) {
+    } else if ((playTime * 0.25 < leftTime) && (leftTime < playTime * 0.5)) {
 
         if (ballsLength < 4) {
             addBall($field);
         }
 
-    } else if ((0 < leftTime) && (leftTime < 15000)) {
+    } else if ((0 < leftTime) && (leftTime < playTime * 0.25)) {
 
         if (ballsLength < 5) {
             addBall($field);
@@ -158,5 +164,3 @@ function handler(eo) {
         });
     }
 };
-
-PlanNextTick();
