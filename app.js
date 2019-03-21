@@ -16,7 +16,7 @@ let $field = $('.game-field'),
     controllerArray = [],
     modelArray = [],
     startTime = Date.now(),
-    playTime = 10000,
+    playTime = 60000,
     score = 0;
 
 addBall($field);
@@ -98,13 +98,35 @@ function PlanNextTick() {
         $spanTime = $('.time'),
         $spanYourScore = $('.your-score'),
         $balls = $('circle'),
-        ballsLength = $balls.length;
+        ballsLength = $balls.length,
+        leftTime = playTime - timePassed;
 
-    if (ballsLength < 2) {
-        addBall($field);
+    if ((45000 < leftTime) && (leftTime < playTime)) {
+
+        if (ballsLength < 2) {
+            addBall($field);
+        }
+
+    } else if ((30000 < leftTime) && (leftTime < 45000)) {
+
+        if (ballsLength < 3) {
+            addBall($field);
+        }
+
+    } else if ((15000 < leftTime) && (leftTime < 30000)) {
+
+        if (ballsLength < 4) {
+            addBall($field);
+        }
+
+    } else if ((0 < leftTime) && (leftTime < 15000)) {
+
+        if (ballsLength < 5) {
+            addBall($field);
+        }
     }
 
-    (playTime - timePassed) < 0 ? $spanTime.text(0) : $spanTime.text((playTime - timePassed) / 1000);
+    leftTime < 0 ? $spanTime.text(0) : $spanTime.text(leftTime / 1000);
 
     $spanYourScore.text(score);
 
