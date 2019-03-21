@@ -121,9 +121,19 @@ function handler(eo) {
     score -= 100;
 
     if ($(item).attr('r')) {
+        let $x = $(item).attr('cx'),
+            $y = $(item).attr('cy');
+
         $(item).remove();
         score += 400;
         addBall($field);
+
+        modelArray = modelArray.filter((item) => {
+
+            if (item.getX() != $x && item.getY() != $y) {
+                return item;
+            }
+        });
     }
 };
 
