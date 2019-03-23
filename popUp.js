@@ -3,8 +3,8 @@
 $(document).ready(function () {
     //При нажатии на ссылку с классом poplight и href атрибута тега <a> с #
     $('a.poplight[href*=\\#]').click(function () {
-        var popID = $(this).attr('rel'); //получаем имя окна, важно не забывать при добавлении новых менять имя в атрибуте rel ссылки
-        var popURL = $(this).attr('href'); //получаем размер из href атрибута ссылки
+        let popID = $(this).attr('rel'), //получаем имя окна, важно не забывать при добавлении новых менять имя в атрибуте rel ссылки
+            popURL = $(this).attr('href'); //получаем размер из href атрибута ссылки
 
         //запрос и переменные из href url
         var query = popURL.split('?');
@@ -12,7 +12,7 @@ $(document).ready(function () {
         var popWidth = dim[0].split('=')[1]; //первое значение строки запроса
 
         //Добавляем к окну кнопку закрытия
-        $('#' + popID).fadeIn().css({ 'width': Number(popWidth) }).prepend('<a href="#" title="Закрыть" class="close"></a>');
+        $('#' + popID).fadeIn().css({ 'width': Number(popWidth) }).prepend('<a href="#" title="Close" class="close"></a>');
 
         //Определяем маржу(запас) для выравнивания по центру (по вертикали и горизонтали) - мы добавляем 80 к высоте / ширине с учетом отступов + ширина рамки определённые в css
         var popMargTop = ($('#' + popID).height() + 80) / 2;
