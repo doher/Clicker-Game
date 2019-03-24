@@ -1,11 +1,11 @@
 'use strict';
 
-import { startGame } from './game.js';
+import { startGame, saveBestScore } from './game.js';
 
 $('body').click(function (eo) {
     eo.preventDefault();
 
-    let item = $('.start-game');
+    let item = eo.target;
 
     if (item) {
         fieldGame();
@@ -50,8 +50,23 @@ function loadGamePage() {
         dataType: 'html',
         success: function (data) {
             $('.main-content').html(data);
-            startGame();
+            $('.heading').append('<h2 class="timer">3</h2>');
+            saveBestScore();
+            let count = 3,
+                counter = setInterval(function timer() {
+                    count = count - 1;
+
+                    if (count <= 0) {
+                        clearInterval(counter);
+                        startGame();
+                        $('.timer').remove();
+                        return;
+                    }
+                    $('.timer').text(count);
+                }, 1000);
         }
     });
 }
+
+
 

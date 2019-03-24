@@ -16,7 +16,12 @@ body {
     text-align: center;
     background-image: linear-gradient(rgb(63, 104, 182), rgb(99, 204, 187));
     height: 20vh;
-    line-height: 20vh;
+    padding: 2%;
+}
+
+.timer {
+    color: brown;
+    font-size: 4rem;
 }
 
 .nav-list li {
@@ -56,7 +61,7 @@ a {
     font-size: 3rem;
 }
 
-aside.game-rules, .hight-score-field {
+aside.game-rules, .best-score-field {
     color: rgb(82, 64, 55);
     background-image: linear-gradient(rgb(99, 204, 187), rgb(63, 104, 182), rgb(99, 204, 187));
     width: 25vw;

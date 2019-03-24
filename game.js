@@ -4,13 +4,25 @@ import { BallModel } from './ballModel.js';
 import { BallView } from './ballView.js';
 import { BallController, MAX_RADIUS } from './ballController.js';
 
+export function saveBestScore() {
+    let bestScore = localStorage.getItem('score');
+
+    if (!bestScore) {
+        localStorage.setItem('score', score);
+    } else {
+        let $bestScore = $('.best-score');
+
+        $bestScore.text(bestScore);
+    }
+}
+
 export function startGame() {
     let $field = $('.game-field'),
         $svg = $('g.ball'),
         controllerArray = [],
         modelArray = [],
         startTime = Date.now(),
-        playTime = 10000,
+        playTime = 60000,
         score = 0;
 
     $field.on('click', handler);
@@ -124,7 +136,14 @@ export function startGame() {
         if (timePassed < playTime) {
             RequestAnimationFrame(Tick);
         } else {
+            let previousBestScore = localStorage.getItem('score');
+
             $field.off('click', handler);
+
+            if (score > previousBestScore) {
+                localStorage.setItem('score', score);
+                saveBestScore();
+            }
         }
     }
 
