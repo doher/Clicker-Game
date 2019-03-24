@@ -27,6 +27,11 @@ export function startGame() {
 
     $field.on('click', handler);
 
+    $('.reset-game').prop('disabled', false);
+    $('.reset-game').click(function () {
+        location.reload();
+    });
+
     let RequestAnimationFrame =
         window.requestAnimationFrame ||
         window.webkitRequestAnimationFrame ||

@@ -75,3 +75,11 @@ aside.game-rules, .best-score-field {
     height: 20vh;
     background-image: linear-gradient(rgb(99, 204, 187), rgb(63, 104, 182));
 }
+
+.reset-game {
+    margin-top: 10px;
+    padding: 1%;
+    border-radius: 5px;
+    background-color: rgb(144, 29, 29);
+    color: aliceblue;
+}

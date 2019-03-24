@@ -7,7 +7,7 @@ $('body').click(function (eo) {
 
     let item = eo.target;
 
-    if (item) {
+    if ($(item).hasClass("start-game")) {
         fieldGame();
     }
 });
@@ -51,6 +51,7 @@ function loadGamePage() {
         success: function (data) {
             $('.main-content').html(data);
             $('.heading').append('<h2 class="timer">3</h2>');
+            $('.reset-game').prop('disabled', true);
             saveBestScore();
             let count = 3,
                 counter = setInterval(function timer() {
@@ -67,6 +68,5 @@ function loadGamePage() {
         }
     });
 }
-
 
 
