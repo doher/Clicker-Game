@@ -16,12 +16,32 @@ body {
     text-align: center;
     background-image: linear-gradient(rgb(63, 104, 182), rgb(99, 204, 187));
     height: 20vh;
-    padding: 2%;
+    padding-top: 2%;
+}
+
+.game-name {
+    font-size: 48px;
+    background: -webkit-linear-gradient(#FF0000, yellow);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.start-game {
+    color: rgb(18, 27, 104);
+    font-weight: bold;
+}
+
+.start-game:hover {
+    background: -webkit-linear-gradient(#FF0000, rgba(105, 25, 158, 0.692));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: bold;
 }
 
 .timer {
-    color: brown;
-    font-size: 4rem;
+    color: rgb(192, 55, 73);
+    font-size: 3rem;
+    font-weight: bold;
 }
 
 .nav-list li {
@@ -34,7 +54,6 @@ body {
 
 a {
     text-decoration: none;
-    color: aliceblue;
 }
 
 .main-content {
@@ -53,7 +72,7 @@ a {
 }
 
 .start-game-field {
-    background-image: linear-gradient(rgb(66, 38, 11), rgb(160, 65, 22), rgb(196, 65, 42));
+    background-image: linear-gradient(rgb(18, 27, 104), rgb(41, 72, 139), rgb(80, 83, 107));
     width: 50vw;
     text-align: center;
     line-height: 60vh;
@@ -62,13 +81,22 @@ a {
 }
 
 aside.game-rules, .best-score-field {
-    color: rgb(82, 64, 55);
+    color: rgb(6, 45, 68);
     background-image: linear-gradient(rgb(99, 204, 187), rgb(63, 104, 182), rgb(99, 204, 187));
     width: 25vw;
-    border: 1px solid rgb(81, 79, 180);
+    border: 2px solid rgba(79, 148, 180, 0.404);
     border-radius: 5px;
     margin: 0 2%;
     padding: 1%;
+}
+
+.best-score {
+    font-weight: bold;
+    color: rgb(153, 69, 69);
+}
+.your-score {
+    font-weight: bold;
+    color: rgb(57, 22, 170);
 }
 
 .footer {
@@ -77,9 +105,12 @@ aside.game-rules, .best-score-field {
 }
 
 .reset-game {
-    margin-top: 10px;
-    padding: 1%;
+    font-weight: bold;
+    font-size: 20px;
+    margin-top: 40px;
+    padding: 2%;
     border-radius: 5px;
-    background-color: rgb(144, 29, 29);
-    color: aliceblue;
+    background-color: rgb(14, 49, 124);
+    color: rgb(186, 192, 197);
+    border: 1px solid rgba(0, 119, 255, 0.486);
 }
