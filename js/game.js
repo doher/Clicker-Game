@@ -8,7 +8,7 @@ export function saveBestScore() {
     let bestScore = localStorage.getItem('score');
 
     if (!bestScore) {
-        localStorage.setItem('score', score);
+        localStorage.setItem('score', 0);
     } else {
         let $bestScore = $('.best-score');
 
